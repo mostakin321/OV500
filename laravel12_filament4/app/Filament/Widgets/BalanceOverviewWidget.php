@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use App\Models\Customer;
 use App\Models\CustomerBalance;
+use App\Models\LiveCall;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -33,7 +34,22 @@ class BalanceOverviewWidget extends StatsOverviewWidget
             ->whereIn('account_id', $postpaidAccountIds)
             ->sum('credit_limit');
 
-        $activeLiveCalls = \App\Models\LiveCall::query()
+        $liveCdrTotal = LiveCall::query()->count();
+
+        $liveCdrAnswered = LiveCall::query()
+            ->whereNotNull('answer_time')
+            ->count();
+
+        $liveCdrAsr = $liveCdrTotal > 0
+            ? ($liveCdrAnswered / $liveCdrTotal) * 100
+            : 0;
+
+        $liveCdrAcd = LiveCall::query()
+            ->whereNotNull('answer_time')
+            ->selectRaw('AVG(TIMESTAMPDIFF(SECOND, answer_time, COALESCE(end_time, NOW()))) as acd_seconds')
+            ->value('acd_seconds') ?? 0;
+
+        $activeLiveCalls = LiveCall::query()
             ->whereNotIn('callstatus', ['END', 'ENDED', 'HANGUP'])
             ->count();
 
@@ -46,6 +62,10 @@ class BalanceOverviewWidget extends StatsOverviewWidget
                 ->description('Configured credit exposure ceiling'),
             Stat::make('Live CDR / Active Calls', $activeLiveCalls)
                 ->description('Calls currently visible in livecalls'),
+            Stat::make('Live CDR ASR', number_format($liveCdrAsr, 2).'%')
+                ->description($liveCdrAnswered.' answered / '.$liveCdrTotal.' attempts'),
+            Stat::make('Live CDR ACD', gmdate('H:i:s', (int) round((float) $liveCdrAcd)))
+                ->description(number_format((float) $liveCdrAcd, 2).' average answered seconds'),
         ];
     }
 }

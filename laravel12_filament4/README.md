@@ -48,8 +48,8 @@ php artisan serve
 
 The admin dashboard includes:
 
-- **Balance overview** totals for prepaid accounts, postpaid accounts, postpaid credit limits, and active live CDR rows.
-- **Live CDR View** polling the legacy `livecalls` table every five seconds for real-time call monitoring.
+- **Balance overview** totals for prepaid accounts, postpaid accounts, postpaid credit limits, active live CDR rows, live ASR, and live ACD.
+- **Live CDR View** polling the legacy `livecalls` table every five seconds for real-time call monitoring, including per-call duration, ACD seconds, and answered status.
 - **Prepaid Balance Watchlist** for prepaid customers with zero or negative balances.
 - **Postpaid Credit Exposure** for postpaid customers whose balance has reached or exceeded their configured credit limit.
 

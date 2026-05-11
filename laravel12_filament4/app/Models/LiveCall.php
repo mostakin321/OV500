@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 class LiveCall extends Model
@@ -24,4 +25,32 @@ class LiveCall extends Model
         'answer_time' => 'datetime',
         'end_time' => 'datetime',
     ];
+
+    protected function isAnswered(): Attribute
+    {
+        return Attribute::get(fn (): bool => $this->answer_time !== null);
+    }
+
+    protected function callDurationSeconds(): Attribute
+    {
+        return Attribute::get(function (): ?int {
+            if ($this->start_time === null) {
+                return null;
+            }
+
+            return max(0, $this->start_time->diffInSeconds($this->end_time ?? now()));
+        });
+    }
+
+    protected function acdDurationSeconds(): Attribute
+    {
+        return Attribute::get(function (): ?int {
+            if ($this->answer_time === null) {
+                return null;
+            }
+
+            return max(0, $this->answer_time->diffInSeconds($this->end_time ?? now()));
+        });
+    }
 }
+

@@ -23,6 +23,8 @@ class LiveCdrWidget extends TableWidget
             ->columns([
                 TextColumn::make('start_time')->label('Start')->dateTime()->sortable(),
                 TextColumn::make('answer_time')->label('Answer')->dateTime()->sortable(),
+                TextColumn::make('call_duration_seconds')->label('Duration')->numeric()->sortable(false),
+                TextColumn::make('acd_duration_seconds')->label('ACD Seconds')->numeric()->sortable(false),
                 TextColumn::make('customer_company')->label('Customer')->searchable()->sortable(),
                 TextColumn::make('customer_account_id')->label('Account')->searchable()->sortable(),
                 TextColumn::make('customer_src_caller')->label('Caller')->searchable(),
@@ -31,6 +33,7 @@ class LiveCdrWidget extends TableWidget
                 TextColumn::make('customer_destination')->label('Destination')->searchable(),
                 TextColumn::make('customer_rate')->label('Sell Rate')->numeric(decimalPlaces: 6)->sortable(),
                 TextColumn::make('carrier_rate')->label('Buy Rate')->numeric(decimalPlaces: 6)->sortable(),
+                TextColumn::make('is_answered')->label('Answered')->badge()->formatStateUsing(fn (bool $state): string => $state ? 'Yes' : 'No'),
                 TextColumn::make('callstatus')->label('Status')->badge()->sortable(),
                 TextColumn::make('call_flow')->label('Flow')->badge()->sortable(),
                 TextColumn::make('fs_host')->label('FS Host')->searchable(),
