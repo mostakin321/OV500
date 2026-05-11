@@ -16,7 +16,9 @@ class ResellerResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-building-office-2';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Accounts';
+    protected static string|\UnitEnum|null $navigationGroup = 'User Management';
+
+    protected static ?int $navigationSort = 50;
 
     protected static ?string $recordTitleAttribute = 'company_name';
 

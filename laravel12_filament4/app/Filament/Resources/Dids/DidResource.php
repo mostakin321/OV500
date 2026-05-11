@@ -16,7 +16,11 @@ class DidResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-hashtag';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'DID';
+    protected static string|\UnitEnum|null $navigationGroup = 'Routing Management';
+
+    protected static ?string $navigationLabel = 'Incoming Numbers (DID)';
+
+    protected static ?int $navigationSort = 50;
 
     protected static ?string $recordTitleAttribute = 'did_number';
 

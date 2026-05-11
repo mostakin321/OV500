@@ -16,7 +16,9 @@ class CustomerBalanceResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-wallet';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Billing';
+    protected static string|\UnitEnum|null $navigationGroup = 'User Management';
+
+    protected static ?int $navigationSort = 30;
 
     protected static ?string $navigationLabel = 'Account Balances';
 

@@ -48,12 +48,26 @@ php artisan serve
 
 The admin dashboard includes:
 
+- A Filament navigation layout aligned to the legacy OV500 left menu from the reference image: **Live System Reports**, **Rates & Package**, **Routing Management**, **User Management**, **Call Detail Reports**, and **Business Report**.
 - **Balance overview** totals for prepaid customer accounts, postpaid customer accounts, postpaid credit limits, reseller balances, user-only balances, active live CDR rows, live ASR, and live ACD.
 - **Live CDR View** polling the legacy `livecalls` table every five seconds for real-time call monitoring, including per-call duration, ACD seconds, and answered status.
 - **Prepaid Balance Watchlist** for prepaid customers with zero or negative balances.
 - **Postpaid Credit Exposure** for postpaid customers whose balance has reached or exceeded their configured credit limit.
-- **Account Balances** under Billing to manage the shared legacy `customer_balance` rows for customer, reseller, and user account IDs.
-- **Users, Customers, and Resellers** under Accounts now expose balance, credit limit, usable balance, and credit status columns for faster operations triage.
+- **Account Balances** under User Management to manage the shared legacy `customer_balance` rows for customer, reseller, and user account IDs.
+- **Users, Customers, and Resellers** under User Management now expose balance, credit limit, usable balance, and credit status columns for faster operations triage.
+
+## Legacy navigation mapping
+
+The Filament sidebar follows the attached legacy OV500 menu structure:
+
+- **Live System Reports**: Live Call Summary, Customer QoS Summary, Carrier QoS Summary.
+- **Rates & Package**: Ratecard, Rates, Tariffs, Package.
+- **Routing Management**: Vendor, Carriers, Routes, Dial Plans, Incoming Numbers (DID).
+- **User Management**: System Users, My Users & Services, Account Balances, Customers, Resellers.
+- **Call Detail Reports**: CDR.
+- **Business Report**: Traffic Profit & Loss, Report, Sales Detail, Sales Summary, vendor Report, Payment Log.
+
+Placeholder pages preserve the legacy navigation entry points while each module is migrated from CodeIgniter into native Laravel and Filament resources.
 
 ## Quality checks
 

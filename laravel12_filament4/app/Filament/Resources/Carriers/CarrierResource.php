@@ -16,7 +16,11 @@ class CarrierResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-signal';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Routing';
+    protected static string|\UnitEnum|null $navigationGroup = 'Routing Management';
+
+    protected static ?string $navigationLabel = 'Carriers';
+
+    protected static ?int $navigationSort = 20;
 
     protected static ?string $recordTitleAttribute = 'carrier_name';
 

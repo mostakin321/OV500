@@ -16,7 +16,11 @@ class CustomerSipAccountResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-phone';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Switching';
+    protected static string|\UnitEnum|null $navigationGroup = 'User Management';
+
+    protected static ?string $navigationLabel = 'My Users & Services';
+
+    protected static ?int $navigationSort = 20;
 
     protected static ?string $recordTitleAttribute = 'username';
 

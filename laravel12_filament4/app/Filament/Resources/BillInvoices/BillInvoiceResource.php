@@ -16,7 +16,11 @@ class BillInvoiceResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-document-currency-dollar';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Billing';
+    protected static string|\UnitEnum|null $navigationGroup = 'Business Report';
+
+    protected static ?string $navigationLabel = 'Report';
+
+    protected static ?int $navigationSort = 20;
 
     protected static ?string $recordTitleAttribute = 'invoice_id';
 

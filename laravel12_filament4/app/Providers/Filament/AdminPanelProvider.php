@@ -10,6 +10,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -32,6 +33,26 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->colors([
                 'primary' => Color::Blue,
+            ])
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label('Live System Reports')
+                    ->icon('heroicon-o-arrow-path-rounded-square'),
+                NavigationGroup::make()
+                    ->label('Rates & Package')
+                    ->icon('heroicon-o-currency-dollar'),
+                NavigationGroup::make()
+                    ->label('Routing Management')
+                    ->icon('heroicon-o-arrows-right-left'),
+                NavigationGroup::make()
+                    ->label('User Management')
+                    ->icon('heroicon-o-user-circle'),
+                NavigationGroup::make()
+                    ->label('Call Detail Reports')
+                    ->icon('heroicon-o-squares-2x2'),
+                NavigationGroup::make()
+                    ->label('Business Report')
+                    ->icon('heroicon-o-document-text'),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

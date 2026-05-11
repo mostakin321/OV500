@@ -16,7 +16,9 @@ class CustomerResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user-group';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Accounts';
+    protected static string|\UnitEnum|null $navigationGroup = 'User Management';
+
+    protected static ?int $navigationSort = 40;
 
     protected static ?string $recordTitleAttribute = 'company_name';
 

@@ -16,7 +16,11 @@ class CustomerRateResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-currency-dollar';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Rating';
+    protected static string|\UnitEnum|null $navigationGroup = 'Rates & Package';
+
+    protected static ?string $navigationLabel = 'Rates';
+
+    protected static ?int $navigationSort = 20;
 
     protected static ?string $recordTitleAttribute = 'destination';
 

@@ -16,7 +16,11 @@ class CarrierRateResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-banknotes';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Rating';
+    protected static string|\UnitEnum|null $navigationGroup = 'Rates & Package';
+
+    protected static ?string $navigationLabel = 'Ratecard';
+
+    protected static ?int $navigationSort = 10;
 
     protected static ?string $recordTitleAttribute = 'destination';
 

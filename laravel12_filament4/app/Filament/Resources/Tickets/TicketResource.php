@@ -16,7 +16,9 @@ class TicketResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-ticket';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Support';
+    protected static string|\UnitEnum|null $navigationGroup = 'Business Report';
+
+    protected static ?int $navigationSort = 70;
 
     protected static ?string $recordTitleAttribute = 'subject';
 
