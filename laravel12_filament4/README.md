@@ -55,6 +55,16 @@ The admin dashboard includes:
 - **Account Balances** under Billing to manage the shared legacy `customer_balance` rows for customer, reseller, and user account IDs.
 - **Users, Customers, and Resellers** under Accounts now expose balance, credit limit, usable balance, and credit status columns for faster operations triage.
 
+## Quality checks
+
+Before opening or updating a PR, verify that generated docs and code are free of unresolved Git merge conflict markers:
+
+```bash
+composer run check-conflicts
+```
+
+The check scans the scaffold while excluding dependency/build directories such as `vendor`, `node_modules`, `storage`, and `bootstrap/cache`.
+
 ## Compatibility notes
 
 - Filament 4 requires Laravel 11.28+ and PHP 8.2+, and this scaffold pins Laravel Framework `^12.0` with Filament `^4.0`.
