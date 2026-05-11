@@ -18,6 +18,12 @@ class CustomerBalanceResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Billing';
 
+    protected static ?string $navigationLabel = 'Account Balances';
+
+    protected static ?string $modelLabel = 'Account Balance';
+
+    protected static ?string $pluralModelLabel = 'Account Balances';
+
     protected static ?string $recordTitleAttribute = 'account_id';
 
     public static function form(Schema $schema): Schema

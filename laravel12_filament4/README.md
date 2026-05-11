@@ -17,8 +17,8 @@ This directory is a Laravel 12 / Filament 4 rebuild target for the legacy OV500 
   - DID inventory
   - Invoices
   - Tickets
-  - Customer balance management for prepaid and postpaid accounts
-- Dashboard widgets for live CDR monitoring, prepaid balance risk, and postpaid credit exposure.
+  - Account balance management for customer, reseller, and user-linked accounts, including prepaid and postpaid customer accounts
+- Dashboard widgets for live CDR monitoring, prepaid balance risk, postpaid credit exposure, reseller balances, and user-only account balances.
 
 ## Setup
 
@@ -48,10 +48,12 @@ php artisan serve
 
 The admin dashboard includes:
 
-- **Balance overview** totals for prepaid accounts, postpaid accounts, postpaid credit limits, active live CDR rows, live ASR, and live ACD.
+- **Balance overview** totals for prepaid customer accounts, postpaid customer accounts, postpaid credit limits, reseller balances, user-only balances, active live CDR rows, live ASR, and live ACD.
 - **Live CDR View** polling the legacy `livecalls` table every five seconds for real-time call monitoring, including per-call duration, ACD seconds, and answered status.
 - **Prepaid Balance Watchlist** for prepaid customers with zero or negative balances.
 - **Postpaid Credit Exposure** for postpaid customers whose balance has reached or exceeded their configured credit limit.
+- **Account Balances** under Billing to manage the shared legacy `customer_balance` rows for customer, reseller, and user account IDs.
+- **Users, Customers, and Resellers** under Accounts now expose balance, credit limit, usable balance, and credit status columns for faster operations triage.
 
 ## Compatibility notes
 

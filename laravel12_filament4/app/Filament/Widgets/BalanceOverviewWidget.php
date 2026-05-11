@@ -5,6 +5,8 @@ namespace App\Filament\Widgets;
 use App\Models\Customer;
 use App\Models\CustomerBalance;
 use App\Models\LiveCall;
+use App\Models\Reseller;
+use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -34,6 +36,22 @@ class BalanceOverviewWidget extends StatsOverviewWidget
             ->whereIn('account_id', $postpaidAccountIds)
             ->sum('credit_limit');
 
+        $resellerAccountIds = Reseller::query()->pluck('account_id');
+
+        $userAccountIds = User::query()
+            ->whereNotIn('account_id', $prepaidAccountIds->merge($postpaidAccountIds)->merge($resellerAccountIds)->filter()->unique())
+            ->pluck('account_id')
+            ->filter()
+            ->unique();
+
+        $resellerBalance = CustomerBalance::query()
+            ->whereIn('account_id', $resellerAccountIds)
+            ->sum('balance');
+
+        $userOnlyBalance = CustomerBalance::query()
+            ->whereIn('account_id', $userAccountIds)
+            ->sum('balance');
+
         $liveCdrTotal = LiveCall::query()->count();
 
         $liveCdrAnswered = LiveCall::query()
@@ -60,6 +78,10 @@ class BalanceOverviewWidget extends StatsOverviewWidget
                 ->description('Balance: '.number_format((float) $postpaidBalance, 6)),
             Stat::make('Postpaid Credit Limit', number_format((float) $postpaidCreditLimit, 6))
                 ->description('Configured credit exposure ceiling'),
+            Stat::make('Reseller Balances', $resellerAccountIds->count())
+                ->description('Balance: '.number_format((float) $resellerBalance, 6)),
+            Stat::make('User-only Balances', $userAccountIds->count())
+                ->description('Balance: '.number_format((float) $userOnlyBalance, 6)),
             Stat::make('Live CDR / Active Calls', $activeLiveCalls)
                 ->description('Calls currently visible in livecalls'),
             Stat::make('Live CDR ASR', number_format($liveCdrAsr, 2).'%')

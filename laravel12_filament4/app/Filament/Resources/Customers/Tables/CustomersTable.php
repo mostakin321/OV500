@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class CustomersTable
@@ -21,10 +22,20 @@ class CustomersTable
                 TextColumn::make('name')->label('Name')->sortable()->searchable(),
                 TextColumn::make('phone')->label('Phone')->sortable()->searchable(),
                 TextColumn::make('emailaddress')->label('Emailaddress')->sortable()->searchable(),
-                TextColumn::make('billing_type')->label('Billing Type')->sortable()->searchable(),
+                TextColumn::make('billing_type')->label('Billing Type')->badge()->sortable()->searchable(),
+                TextColumn::make('balance.balance')->label('Balance / Used Credit')->numeric(decimalPlaces: 6),
+                TextColumn::make('balance.credit_limit')->label('Credit Limit')->numeric(decimalPlaces: 6),
+                TextColumn::make('balance.usable_balance')->label('Usable Balance')->numeric(decimalPlaces: 6),
+                TextColumn::make('balance.credit_status')->label('Credit Status')->badge(),
             ])
             ->filters([
-                // Add module-specific filters during the next migration pass.
+                SelectFilter::make('billing_type')
+                    ->label('Billing Type')
+                    ->options([
+                        'prepaid' => 'Prepaid',
+                        'postpaid' => 'Postpaid',
+                        'netoff' => 'Net-off',
+                    ]),
             ])
             ->recordActions([
                 EditAction::make(),
